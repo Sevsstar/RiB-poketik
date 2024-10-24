@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox Doors Character Simulator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        img {
+            cursor: pointer;
+            max-width: 100%;
+            height: auto;
+        }
+        .character {
+            margin-top: 20px;
+            font-size: 1.5em;
+        }
+        .rare {
+            color: green;
+        }
+        .epic {
+            color: purple;
+        }
+        .legendary {
+            color: orange;
+        }
+    </style>
+</head>
+<body>
+    <h1>Click the Image to Summon a Character</h1>
+    <img src="your-image.jpg" id="summonImage" alt="Roblox Doors" />
+    <div id="characterResult" class="character"></div>
+
+    <script>
+        const characters = [
+            { name: "Figure", rarity: "common" },
+            { name: "Seek", rarity: "rare" },
+            { name: "Rush", rarity: "rare" },
+            { name: "Ambush", rarity: "epic" },
+            { name: "Glitch", rarity: "legendary" }
+        ];
+
+        const rarityColors = {
+            common: '',
+            rare: 'rare',
+            epic: 'epic',
+            legendary: 'legendary'
+        };
+
+        function getRandomCharacter() {
+            // Определяем вероятность выпадения на основе редкости
+            const rand = Math.random();
+            if (rand < 0.6) return characters[0]; // 60% chance common
+            if (rand < 0.85) return characters[1]; // 25% chance rare
+            if (rand < 0.95) return characters[3]; // 10% chance epic
+            return characters[4]; // 5% chance legendary
+        }
+
+        document.getElementById('summonImage').addEventListener('click', function() {
+            const character = getRandomCharacter();
+            const resultDiv = document.getElementById('characterResult');
+            resultDiv.innerHTML = `You got: <span class="${rarityColors[character.rarity]}">${character.name}</span>`;
+        });
+    </script>
+</body>
+</html>
